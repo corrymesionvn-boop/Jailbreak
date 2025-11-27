@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS4 9.00 Jailbreak Web Host</title>
+    <!-- Tải Tailwind CSS để tạo giao diện đẹp và responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Thiết lập font chữ và đảm bảo body chiếm toàn bộ màn hình */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000; /* Màu đen tối ưu cho PS4 */
+        }
+        .background-image {
+            /* Hình ảnh nền (có thể thay bằng hình ảnh PS4 hoặc logo jailbreak khác) */
+            background-image: url('https://placehold.co/1920x1080/0d1d4d/ffffff?text=PS4+9.00+Host');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3; /* Làm mờ để chữ dễ đọc */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .content-box {
+            z-index: 10;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.7); /* Nền tối mờ cho chữ nổi bật */
+            border-radius: 1rem;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Ảnh nền -->
+    <div class="background-image"></div>
+
+    <!-- Hộp chứa nội dung chính -->
+    <div id="status-container" class="content-box p-12 text-center shadow-2xl transition-all duration-500 max-w-lg w-full mx-4">
+        
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4" id="title-message">
+            Chuẩn bị Jailbreak PS4 (9.00)
+        </h1>
+        
+        <p class="text-lg sm:text-xl font-medium" id="status-message">
+            Vui lòng nhấn nút "Bắt đầu" để khởi động quá trình.
+        </p>
+
+        <button 
+            id="start-button" 
+            onclick="startJailbreak()"
+            class="mt-6 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full shadow-lg transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+        >
+            Bắt đầu Jailbreak
+        </button>
+
+    </div>
+
+    <script>
+        const titleMessage = document.getElementById('title-message');
+        const statusMessage = document.getElementById('status-message');
+        const startButton = document.getElementById('start-button');
+        const statusContainer = document.getElementById('status-container');
+        
+        // Cấu hình thời gian trễ mô phỏng quá trình jailbreak (miligiây)
+        const JAILBREAK_DELAY = 4000; 
+
+        function startJailbreak() {
+            // 1. Vô hiệu hóa nút và cập nhật trạng thái
+            startButton.disabled = true;
+            startButton.textContent = 'Đang tiến hành...';
+
+            titleMessage.textContent = 'Đang Jailbreak...';
+            statusMessage.textContent = 'Đang tải và thực thi mã khai thác. Vui lòng đợi. (Không cần USB)';
+            statusContainer.classList.add('animate-pulse'); // Thêm hiệu ứng nhấp nháy nhẹ
+
+            // 2. Bắt đầu quá trình (Mã Exploit được thực thi ở đây)
+            setTimeout(() => {
+                // ----------------------------------------------------------------------
+                // >>> VỊ TRÍ BẠN CẦN CHÈN MÃ JAVASCRIPT EXPLOIT THỰC TẾ <<<
+                // ----------------------------------------------------------------------
+                // Bạn hãy dán TẤT CẢ mã JavaScript của Exploit 9.00 (bao gồm cả ROP chain và loader)
+                // vào ngay dưới dòng này. Mã này thường rất dài.
+
+                // VÍ DỤ: Nếu mã exploit của bạn là một hàm tên 'runExploit900()':
+                // try {
+                //     // Đây là nơi bạn gọi hàm chính của mã exploit
+                //     // Ví dụ: runExploit900();
+                //     
+                //     console.log("Mã Exploit đã được chèn và gọi.");
+                //     
+                //     // Thông thường, mã exploit thực tế sẽ tự thông báo thành công hoặc thất bại.
+                //     // Nếu mã exploit không tự thông báo, bạn sẽ gọi hàm bên dưới.
+                //     // completeJailbreak(true); 
+
+                // } catch (error) {
+                //     console.error("Exploit execution failed:", error);
+                //     // Nếu có lỗi, bạn sẽ gọi hàm báo thất bại.
+                //     // completeJailbreak(false); 
+                //     // return; 
+                // }
+
+                // --- MẶC ĐỊNH SẼ BÁO THÀNH CÔNG SAU KHI MÔ PHỎNG XONG (4 giây) ---
+                // Dòng này dùng để mô phỏng, bạn nên xóa nó khi chèn mã exploit thật
+                completeJailbreak(true); 
+
+            }, JAILBREAK_DELAY);
+        }
+
+        /**
+         * Cập nhật giao diện sau khi quá trình hoàn tất (thành công hoặc thất bại)
+         * @param {boolean} success - Trạng thái thành công hay thất bại
+         */
+        function completeJailbreak(success) {
+            statusContainer.classList.remove('animate-pulse');
+            startButton.style.display = 'none'; // Ẩn nút Bắt đầu
+
+            if (success) {
+                // Jailbreak thành công
+                titleMessage.textContent = 'Jailbreak thành công :D!';
+                statusMessage.textContent = 'Bạn có thể tiếp tục sử dụng console. Chúc bạn vui vẻ!';
+                statusContainer.classList.remove('bg-red-700');
+                statusContainer.classList.add('bg-green-700', 'ring-4', 'ring-green-500/50');
+            } else {
+                // Jailbreak thất bại (nếu bạn thêm logic kiểm tra lỗi)
+                titleMessage.textContent = 'Jailbreak Thất bại X_X';
+                statusMessage.textContent = 'Đã xảy ra lỗi khi thực thi. Vui lòng khởi động lại PS4 và thử lại.';
+                statusContainer.classList.remove('bg-green-700');
+                statusContainer.classList.add('bg-red-700', 'ring-4', 'ring-red-500/50');
+            }
+        }
+    </script>
+</body>
+</html>
